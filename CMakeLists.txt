@@ -64,15 +64,15 @@ if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
   if(LCOV_FOUND)
     add_custom_target(lib_lcov
-    COMMAND ${CMAKE_BINARY_DIR}/tests/libtest_cov
-    COMMAND ${LCOV} --capture --directory src/CMakefiles/libxdemo_cov.dir --output-file src/libxdemo_cov.info --test-name libtest_cov
+    COMMAND tests/libtest_cov
+    COMMAND ${LCOV} --capture --directory src/CMakeFiles/libxdemo_cov.dir --output-file src/libxdemo_cov.info --test-name libtest_cov
     COMMAND rm -rf src/libxdemo_coverage_report
     COMMAND ${GENHTML} src/libxdemo_cov.info --output-directory src/libxdemo_coverage_report --title "Lib coverage report" --show-details --legend
     COMMAND cmake -E echo "Coverage report: ${CMAKE_BINARY_DIR}/src/libxdemo_coverage_report/index.html")
 
     add_custom_target(app_lcov
-    COMMAND ${CMAKE_BINARY_DIR}/apps/xdemo_cov
-    COMMAND ${LCOV} --capture --directory apps/CMakefiles/xdemo_cov.dir --output-file apps/xdemo_cov.info --test-name xdemo_cov
+    COMMAND apps/xdemo_cov
+    COMMAND ${LCOV} --capture --directory apps/CMakeFiles/xdemo_cov.dir --output-file apps/xdemo_cov.info --test-name xdemo_cov
     COMMAND ${LCOV} --remove apps/xdemo_cov.info "/usr*"  --output-file apps/xdemo_cov.info
     COMMAND cmake -E remove_directory apps/xdemo_coverage_report
     COMMAND ${GENHTML} apps/xdemo_cov.info --output-directory apps/xdemo_coverage_report --title "App coverage report" --show-details --legend
